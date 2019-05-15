@@ -12,7 +12,8 @@ User.create(
     name: "David Herrera",
     document: "1024564122",
     age: 23,
-    sex: "Male",
+    gender: "Male",
+    reputation: 4.2,
     email: "dacherreragu@unal.edu.co",
     password: "123456"
 

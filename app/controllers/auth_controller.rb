@@ -2,6 +2,8 @@ class AuthController < ApplicationController
 
     ## Filters ##
 
+
+
     ## Methods ##
 
     # POST /login
@@ -9,16 +11,16 @@ class AuthController < ApplicationController
     def token
         user = User.get_user_by_email(params[:email])
 
-        if(user && user.authenticate(params[:password]))
+        if(user && user.authenticate(params[:password])) # If user exists and data is correct
             token = Token.create_token(user)
 
-            response =  { jwt: token, mesagge: "User has been created successfully" }
+            response =  { jwt: token, mesagge: "User has been signed in successfully" } # Return JWT
 
             render json: response, status: 200
         else
-            response =  { mesagge: "Email or password wrong" }
+            response =  { error: "Email or password wrong" }
 
-            render json: response, status: 401
+            render json: response, status: 401 # Return 'unauthorizated' error
         end
     end
 

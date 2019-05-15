@@ -19,7 +19,8 @@ ActiveRecord::Schema.define(version: 2019_05_13_060403) do
     t.string "name"
     t.string "document"
     t.integer "age"
-    t.string "sex"
+    t.string "gender"
+    t.float "reputation"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
