@@ -8,13 +8,13 @@
 
 ## User seeds ##
 
-User.create(
+user = User.new(
     name: "David Herrera",
     document: "1024564122",
     age: 23,
     gender: "Male",
-    reputation: 4.2,
+    reputation: 0,
     email: "dacherreragu@unal.edu.co",
     password: "123456"
-
 )
+user.save

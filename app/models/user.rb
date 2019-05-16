@@ -74,5 +74,5 @@ class User < ApplicationRecord
         less_than_or_equal_to: 5 } # Reputation between 0-5
     validates :email, presence: true, length: { in: 6..100 },
         format: { with: URI::MailTo::EMAIL_REGEXP } # Email with 6-100 characters and email format
-    #validates :password_digest, presence: true, length: { minimum: 6 } # Password with at least 6 characters
+    validates :password, presence: true, length: { minimum: 6 } # Password with at least 6 characters
 end

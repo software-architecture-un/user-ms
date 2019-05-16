@@ -6,18 +6,30 @@ class UserController < ApplicationController
 
     ## Methods ##
 
+    # POST /signup
     # Create a new user
-=begin
     def create
-        user = User.create_user(params_user) # Create a new user with the entered params
+        user = User.get_user_by_email(params[:email])
 
-        if user != nil # If the user was created successfully
-            render json: Responses.user_successfully_created(user)
-        else # If the user was not created
-            render json: Responses.bad_request
+        if user == nil # If the user not exists
+            user = User.new(params_user) # Create a new user with the entered params
+            user.reputation = 0 # Default value
+
+            if user.save 
+                response = { content: user, mesagge: "User has been created successfully" } # Return the created user
+
+                render json: response, status: 201
+            else
+                response = { error: "Wrong Data" }
+
+                render json: response, status: 400 # Return 'bad request' and nil
+            end
+        else # If the user already exists
+            response = { error: "Email was already registered" }
+
+            render json: response, status: 409 # Return 'conflict' and nil
         end
     end
-=end
 
     # GET /users
     # Show all the users
