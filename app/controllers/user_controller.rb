@@ -7,7 +7,7 @@ class UserController < ApplicationController
     ## Methods ##
 
     # POST /signup
-    # Create a new user
+    # Creates a new user
     def create
         user = User.get_user_by_email(params[:email])
 
@@ -70,7 +70,7 @@ class UserController < ApplicationController
         user = User.update_user(params_user, params[:id]) # Update an existing user with the entered params
 
         if user != nil # If the user was updated successfully
-            response = { content: user, mesagge: "User has been obtained successfully" } # Return the corresponding user
+            response = { content: user, mesagge: "User has been updated successfully" } # Return the corresponding user
 
             render json: response, status: 200
         else # If the user was not updated

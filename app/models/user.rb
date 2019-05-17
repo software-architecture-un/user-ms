@@ -41,7 +41,7 @@ class User < ApplicationRecord
     def self.update_user(user_params, id_user)
         user = self.where(id: id_user).select(:id, :name, :document, :age, :gender, :reputation, :email, :password_digest).first
 
-        if user.update(user_params) # If the user was updated successfully
+        if user && user.update(user_params) # If the user was updated successfully
             return user # Return the updated user
         else
             return nil # Return null if the user was not updated
@@ -52,7 +52,7 @@ class User < ApplicationRecord
     def self.delete_user(id_user)
         user = self.where(id: id_user).select(:id, :name, :document, :age, :gender, :reputation, :email, :password_digest).first
 
-        if user.destroy # If the user was deleted successfully
+        if user && user.destroy # If the user was deleted successfully
             return user # Return the deleted user
         else
             return nil # Return null if the user was not deleted

@@ -1,0 +1,239 @@
+#Test with: http://editor.swagger.io/
+
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Microservice for Users
+  description: Ruby on Rails + PostgreSQL
+  license:
+    name: Software Architecture, 2019-I
+host: 192.168.99.101:3000
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /signup:
+    post:
+      summary: Create a new user
+      operationId: createUser
+      parameters:
+        - name: New User
+          in: body
+          required: true
+          description: User Object
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: User has been created successfully
+        '400':
+          description: Wrong Data
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '409':
+          description: Email was already registered
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+            
+  /login:
+    post:
+      summary: Obtain JWT
+      operationId: login
+      parameters:
+        - name: User and Password
+          in: body
+          required: true
+          description: Login User Object
+          schema:
+            $ref: '#/definitions/UserLogin'
+      responses:
+        '201':
+          description: User has been signed in successfully and JWT was created
+        '401':
+          description: Authentication failed
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  
+  /users:
+    get:
+      summary: Obtain all users
+      operationId: allUsers
+      responses:
+        '200':
+          description: Users has been obtained successfully
+          schema:
+            $ref: '#/definitions/UsersList'
+        '204':
+          description: No users
+          schema:
+            $ref: '#/definitions/WarningModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+            
+  /users/{id}:
+    get:
+      summary: Obtain an user by ID
+      operationId: userByID
+      parameters:
+        - name: id
+          in: path
+          description: Id of the desired user
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: User has been obtained successfully
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: User not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    patch:
+      summary: Update an user
+      operationId: updateUser1
+      parameters:
+        - name: id
+          in: path
+          description: Id of the user to update
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: User has been updated successfully
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: User not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    put:
+      summary: Update an user
+      operationId: updateUser2
+      parameters:
+        - name: id
+          in: path
+          description: Id of the user to update
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: User has been updated successfully
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: User not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Delete an user
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          description: Id of the user to delete
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: User has been deleted successfully
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: User not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    
+definitions:
+  # Users
+  User:
+    type: object
+    properties:
+      name:
+        type: string
+      document:
+        type: string
+      age:
+        type: integer
+      gender:
+        type: string
+      reputation:
+        type: number
+      email:
+        type: string
+      password_digest:
+        type: string
+        
+  # Users login
+  UserLogin:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+        
+  # List of users
+  UsersList:
+    type: object
+    required:
+      - content
+      - message
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/User'
+      message:
+        type: string
+
+# Errors
+  ErrorModel:
+    type: object
+    required:
+      - error
+    properties:
+      error:
+        type: string
+        
+# Warning
+  WarningModel:
+    type: object
+    required:
+      - content
+      - message
+    properties:
+      content:
+        type: object
+      message:
+        type: string
