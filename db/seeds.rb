@@ -13,7 +13,6 @@ user = User.new(
     document: "1024564122",
     age: 23,
     gender: "Male",
-    reputation: 0,
     email: "dacherreragu@unal.edu.co",
     password: "123456"
 )

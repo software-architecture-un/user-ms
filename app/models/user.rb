@@ -75,4 +75,5 @@ class User < ApplicationRecord
     validates :email, presence: true, length: { in: 6..100 },
         format: { with: URI::MailTo::EMAIL_REGEXP } # Email with 6-100 characters and email format
     validates :password, presence: true, length: { minimum: 6 } # Password with at least 6 characters
+    
 end

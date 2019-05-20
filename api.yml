@@ -26,7 +26,7 @@ paths:
           required: true
           description: User Object
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/CreateUser'
       responses:
         '201':
           description: User has been created successfully
@@ -175,10 +175,31 @@ paths:
             $ref: '#/definitions/ErrorModel'
     
 definitions:
+  # Create Users
+  CreateUser:
+    type: object
+    properties:
+      name:
+        type: string
+      document:
+        type: string
+      age:
+        type: integer
+      gender:
+        type: string
+      reputation:
+        type: number
+      email:
+        type: string
+      password_digest:
+        type: string
+
   # Users
   User:
     type: object
     properties:
+      id:
+        type: integer
       name:
         type: string
       document:
