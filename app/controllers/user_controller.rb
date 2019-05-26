@@ -16,7 +16,7 @@ class UserController < ApplicationController
             user.reputation = 0 # Default value
 
             if user.save 
-                response = { content: user, mesagge: "User has been created successfully" } # Return the created user
+                response = { content: user, message: "User has been created successfully" } # Return the created user
 
                 render json: response, status: 201
             else
@@ -37,7 +37,7 @@ class UserController < ApplicationController
         users = User.get_all_users # Obtain all the users from the model
 
         if users.length > 0 # If exist at least one user in DB
-            response = { content: users, mesagge: "Users has been obtained successfully" } # Return all the users
+            response = { content: users, message: "Users has been obtained successfully" } # Return all the users
 
             render json: response, status: 200
         else # If not exist data
@@ -53,7 +53,7 @@ class UserController < ApplicationController
         user = User.get_user_by_id(params[:id]) # Obtain the user corresponding to the id
 
         if user != nil # If exist the user in DB
-            response = { content: user, mesagge: "User has been obtained successfully" } # Return the corresponding user
+            response = { content: user, message: "User has been obtained successfully" } # Return the corresponding user
 
             render json: response, status: 200
         else # If not exist data
@@ -70,7 +70,7 @@ class UserController < ApplicationController
         user = User.update_user(params_user, params[:id]) # Update an existing user with the entered params
 
         if user != nil # If the user was updated successfully
-            response = { content: user, mesagge: "User has been updated successfully" } # Return the corresponding user
+            response = { content: user, message: "User has been updated successfully" } # Return the corresponding user
 
             render json: response, status: 200
         else # If the user was not updated
@@ -86,7 +86,7 @@ class UserController < ApplicationController
         user = User.delete_user(params[:id]) # Delete an existing user
 
         if user != nil # If the user was deleted successfully
-            response = { content: user, mesagge: "User has been deleted successfully" } # Return the corresponding user
+            response = { content: user, message: "User has been deleted successfully" } # Return the corresponding user
 
             render json: response, status: 200
         else # If the user was not destroyed
@@ -99,7 +99,7 @@ class UserController < ApplicationController
     ## Allowed params ##
 
     def params_user
-        params.permit(:id, :name, :document, :age, :gender, :reputation, :email, :password)
+        params.permit(:name, :document, :age, :gender, :reputation, :email, :password)
     end
 
 end

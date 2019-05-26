@@ -41,7 +41,7 @@ class User < ApplicationRecord
     def self.update_user(user_params, id_user)
         user = self.where(id: id_user).select(:id, :name, :document, :age, :gender, :reputation, :email, :password_digest).first
 
-        if user && user.update(user_params) # If the user was updated successfully
+        if user && user.update!(user_params) # If the user was updated successfully
             return user # Return the updated user
         else
             return nil # Return null if the user was not updated
@@ -74,6 +74,8 @@ class User < ApplicationRecord
         less_than_or_equal_to: 5 } # Reputation between 0-5
     validates :email, presence: true, length: { in: 6..100 },
         format: { with: URI::MailTo::EMAIL_REGEXP } # Email with 6-100 characters and email format
-    validates :password, presence: true, length: { minimum: 6 } # Password with at least 6 characters
+
+    validates :password, presence: true, length: {minimum: 6}, on: :create  # Password with at least 6 characters
+    validates :password, length: {minimum: 6}, on: :update, allow_blank: true  # Password with at least 6 characters
     
 end

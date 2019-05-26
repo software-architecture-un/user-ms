@@ -14,7 +14,7 @@ class AuthController < ApplicationController
         if(user && user.authenticate(params[:password])) # If user exists and data is correct
             token = Token.create_token(user)
 
-            response =  { jwt: token, mesagge: "User has been signed in successfully" } # Return JWT
+            response =  { jwt: token, message: "User has been signed in successfully" } # Return JWT
 
             render json: response, status: 201
         else
