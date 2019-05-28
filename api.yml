@@ -7,7 +7,7 @@ info:
   description: Ruby on Rails + PostgreSQL
   license:
     name: Software Architecture, 2019-I
-host: 192.168.99.101:3000
+host: 192.168.99.101:3001
 basePath: /
 schemes:
   - http

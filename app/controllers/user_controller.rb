@@ -16,6 +16,8 @@ class UserController < ApplicationController
             user.reputation = 0 # Default value
 
             if user.save 
+                user = User.get_user_by_id(user.id)
+
                 response = { content: user, message: "User has been created successfully" } # Return the created user
 
                 render json: response, status: 201
@@ -70,6 +72,8 @@ class UserController < ApplicationController
         user = User.update_user(params_user, params[:id]) # Update an existing user with the entered params
 
         if user != nil # If the user was updated successfully
+            user = User.get_user_by_id(user.id)
+
             response = { content: user, message: "User has been updated successfully" } # Return the corresponding user
 
             render json: response, status: 200
