@@ -13,7 +13,6 @@ class UserController < ApplicationController
 
         if user == nil # If the user not exists
             user = User.new(params_user) # Create a new user with the entered params
-            user.reputation = 0 # Default value
 
             if user.save 
                 user = User.get_user_by_id(user.id)
@@ -103,7 +102,7 @@ class UserController < ApplicationController
     ## Allowed params ##
 
     def params_user
-        params.permit(:name, :document, :age, :gender, :reputation, :email, :password)
+        params.permit(:name, :document, :age, :email, :password)
     end
 
 end

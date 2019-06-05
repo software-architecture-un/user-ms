@@ -6,8 +6,6 @@
 #  name            :string
 #  document        :string
 #  age             :integer
-#  gender          :string
-#  reputation      :float
 #  email           :string
 #  password_digest :string
 #  created_at      :datetime         not null

@@ -10,10 +10,45 @@
 
 user = User.new(
     name: "David Herrera",
-    document: "1024564122",
-    age: 23,
-    gender: "Male",
+    document: "123456789",
+    age: 24,
     email: "dacherreragu@unal.edu.co",
+    password: "123456"
+)
+user.save
+
+user = User.new(
+    name: "Jhon Mueses",
+    document: "123456789",
+    age: 28,
+    email: "jjmuesesq@unal.edu.co",
+    password: "123456"
+)
+user.save
+
+user = User.new(
+    name: "Diego Gomez",
+    document: "123456789",
+    age: 25,
+    email: "diagomezpa@unal.edu.co",
+    password: "123456"
+)
+user.save
+
+user = User.new(
+    name: "Gonzalo Baez",
+    document: "123456789",
+    age: 28,
+    email: "gebaezs@unal.edu.co",
+    password: "123456"
+)
+user.save
+
+user = User.new(
+    name: "Carlos López",
+    document: "123456789",
+    age: 29,
+    email: "caralopezrom@unal.edu.co",
     password: "123456"
 )
 user.save
