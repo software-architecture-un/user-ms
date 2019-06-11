@@ -17,16 +17,16 @@ class UserController < ApplicationController
             if user.save 
                 user = User.get_user_by_id(user.id)
 
-                response = { content: user, message: "User has been created successfully" } # Return the created user
+                response = { content: user, message: "User has been created successfully", status: 201 } # Return the created user
 
                 render json: response, status: 201
             else
-                response = { error: "Wrong Data" }
+                response = { content: {}.empty, message: "Wrong Data", status: 400 }
 
                 render json: response, status: 400 # Return 'bad request' and nil
             end
         else # If the user already exists
-            response = { error: "Email was already registered" }
+            response = { content: {}.empty, error: "Email was already registered", status: 409 }
 
             render json: response, status: 409 # Return 'conflict' and nil
         end
@@ -38,11 +38,11 @@ class UserController < ApplicationController
         users = User.get_all_users # Obtain all the users from the model
 
         if users.length > 0 # If exist at least one user in DB
-            response = { content: users, message: "Users has been obtained successfully" } # Return all the users
+            response = { content: users, message: "Users has been obtained successfully", status: 200 } # Return all the users
 
             render json: response, status: 200
         else # If not exist data
-            response = { content: nil, message: "No users" }
+            response = { content: [].empty, message: "No users", status: 204 }
 
             render json: response, status: 204 # Return 'no content' and nil
         end
@@ -54,11 +54,11 @@ class UserController < ApplicationController
         user = User.get_user_by_id(params[:id]) # Obtain the user corresponding to the id
 
         if user != nil # If exist the user in DB
-            response = { content: user, message: "User has been obtained successfully" } # Return the corresponding user
+            response = { content: user, message: "User has been obtained successfully", status: 200 } # Return the corresponding user
 
             render json: response, status: 200
         else # If not exist data
-            response = { error: "User not found" }
+            response = { content: content: {}.empty, message: "User not found", status: 404 }
 
             render json: response, status: 404 # Return 'not found'
         end
@@ -73,11 +73,11 @@ class UserController < ApplicationController
         if user != nil # If the user was updated successfully
             user = User.get_user_by_id(user.id)
 
-            response = { content: user, message: "User has been updated successfully" } # Return the corresponding user
+            response = { content: user, message: "User has been updated successfully", status: 200 } # Return the corresponding user
 
             render json: response, status: 200
         else # If the user was not updated
-            response = { error: "User not found" }
+            response = { content: {}.empty, message: "User not found", status: 404 }
 
             render json: response, status: 404 # Return 'not found'
         end
@@ -89,11 +89,11 @@ class UserController < ApplicationController
         user = User.delete_user(params[:id]) # Delete an existing user
 
         if user != nil # If the user was deleted successfully
-            response = { content: user, message: "User has been deleted successfully" } # Return the corresponding user
+            response = { content: user, message: "User has been deleted successfully", status: 200 } # Return the corresponding user
 
             render json: response, status: 200
         else # If the user was not destroyed
-            response = { error: "User not found" }
+            response = { content: {}.empty, message: "User not found", status: 404 }
 
             render json: response, status: 404 # Return 'not found'
         end

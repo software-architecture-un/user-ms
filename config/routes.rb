@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   ## Auth endpoints ##
 
   post 'login' => "auth#token" #  Return JWT (GET)
+  post 'verify_token' => 'auth#verify' # Verify if JWT is true or not
 
   ## User endpoints ##
 

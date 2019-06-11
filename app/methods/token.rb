@@ -17,13 +17,15 @@ class Token
     end
 
     # Verify if the received token is valid
-    def self.verify_token
+    def self.verify_token(token)
         begin
-            bearer_token = request.headers["Authorization"].split(" ") # Obtaint bearer token and split in an array
-            JWT.decode(bearer_token[1], $secret) # Verify JWT (Second position of the array)
+            JWT.decode(token, $secret) # Verify JWT
+
+            return true
         rescue
-            response = { status: 401, message: "Unauthorizated" } # If JWT is invalid, show authorization error
-            render json: response
+            return false
+            #response = { status: 401, message: "No valid token" } # If JWT is invalid, show authorization error
+            #render json: response
         end
     end
 end
