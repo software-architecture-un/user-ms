@@ -21,12 +21,12 @@ class UserController < ApplicationController
 
                 render json: response, status: 201
             else
-                response = { content: {}.empty, message: "Wrong Data", status: 400 }
+                response = { content: nil, message: "Wrong Data", status: 400 }
 
                 render json: response, status: 400 # Return 'bad request' and nil
             end
         else # If the user already exists
-            response = { content: {}.empty, error: "Email was already registered", status: 409 }
+            response = { content: nil, error: "Email was already registered", status: 409 }
 
             render json: response, status: 409 # Return 'conflict' and nil
         end
@@ -42,7 +42,7 @@ class UserController < ApplicationController
 
             render json: response, status: 200
         else # If not exist data
-            response = { content: [].empty, message: "No users", status: 204 }
+            response = { content: nil, message: "No users", status: 204 }
 
             render json: response, status: 204 # Return 'no content' and nil
         end
@@ -58,7 +58,7 @@ class UserController < ApplicationController
 
             render json: response, status: 200
         else # If not exist data
-            response = { content: content: {}.empty, message: "User not found", status: 404 }
+            response = { content: content: nil, message: "User not found", status: 404 }
 
             render json: response, status: 404 # Return 'not found'
         end
@@ -77,7 +77,7 @@ class UserController < ApplicationController
 
             render json: response, status: 200
         else # If the user was not updated
-            response = { content: {}.empty, message: "User not found", status: 404 }
+            response = { content: nil, message: "User not found", status: 404 }
 
             render json: response, status: 404 # Return 'not found'
         end
@@ -93,7 +93,7 @@ class UserController < ApplicationController
 
             render json: response, status: 200
         else # If the user was not destroyed
-            response = { content: {}.empty, message: "User not found", status: 404 }
+            response = { content: nil, message: "User not found", status: 404 }
 
             render json: response, status: 404 # Return 'not found'
         end
