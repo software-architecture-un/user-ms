@@ -93,7 +93,7 @@ class UserController < ApplicationController
 
             render json: response, status: 200
         else # If the user was not destroyed
-            response = { content: {}, message: "User not found", status: 404 }
+            response = { content: {}, message: "User not found", status: 404 } 
 
             render json: response, status: 404 # Return 'not found'
         end
