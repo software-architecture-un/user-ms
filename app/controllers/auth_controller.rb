@@ -18,7 +18,7 @@ class AuthController < ApplicationController
 
             render json: response, status: 201
         else
-            response =  { content: {}.empty, message: "Authentication failed", status: 401 }
+            response =  { content: {}, message: "Authentication failed", status: 401 }
             render json: response, status: 401 # Return 'unauthorizated' error
         end
     end
