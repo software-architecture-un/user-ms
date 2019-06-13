@@ -25,7 +25,7 @@ class AuthController < ApplicationController
 
     # POST /verify_token
     # Verify if JWT is valid or not
-    def verify_jwt
+    def verify
         is_valid = Token.verify_token(params[:jwt])
 
         if(is_valid == true)
