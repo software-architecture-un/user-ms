@@ -10,4 +10,7 @@ COPY Gemfile.lock /app/Gemfile.lock
 
 RUN bundle install
 
+EXPOSE 3001
+EXPOSE 5434
+
 COPY . /app
