@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   post 'verify_token' => 'auth#verify' # Verify if JWT is true or not
 
   ## User endpoints ##
-
+ 
   post 'signup' => 'user#create' # Create a new user (POST)
   get 'users' => 'user#show' # Return all the user (GET)
   get 'users/:id' => 'user#show_by_id', constraints: { id: /[0-9]+/ } # Return the user corresponding to the id (GET)
