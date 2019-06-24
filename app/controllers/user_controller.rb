@@ -64,6 +64,22 @@ class UserController < ApplicationController
         end
     end
 
+    # GET /users_by_email
+    # Show the user corresponding to the email
+    def show_by_email
+        user = User.get_user_by_email(params[:email]) # Obtain the user corresponding to the id
+
+        if user != nil # If exist the user in DB
+            response = { content: user, message: "User has been obtained successfully", status: 200 } # Return the corresponding user
+
+            render json: response, status: 200
+        else # If not exist data
+            response = { content: {}, message: "User not found", status: 404 }
+
+            render json: response, status: 404 # Return 'not found'
+        end
+    end
+
     # PATCH /users/:id
     # PUT /users/:id
     # Update an existing user
