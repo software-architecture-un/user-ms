@@ -64,7 +64,7 @@ class UserController < ApplicationController
         end
     end
 
-    # GET /users_by_email
+    # POST /users_by_email
     # Show the user corresponding to the email
     def show_by_email
         user = User.get_user_by_email(params[:email]) # Obtain the user corresponding to the id

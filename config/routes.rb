@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   post 'signup' => 'user#create' # Create a new user (POST)
   get 'users' => 'user#show' # Return all the user (GET)
   get 'users/:id' => 'user#show_by_id', constraints: { id: /[0-9]+/ } # Return the user corresponding to the id (GET)
-  get 'users_by_email' => 'user#show_by_email' # Show the user corresponding to the email (GET)
+  post 'users_by_email' => 'user#show_by_email' # Show the user corresponding to the email (GET)
   patch 'users/:id' => 'user#update', constraints: { id: /[0-9]+/ } # Update an existing user (PATCH)
   put 'users/:id' => 'user#update', constraints: { id: /[0-9]+/ } # Update an existing user (PUT)
   delete 'users/:id' => 'user#delete', constraints: { id: /[0-9]+/ } # Delete an existing user (DELETE)
