@@ -6,31 +6,48 @@ class AuthController < ApplicationController
 
     ## Methods ##
 
+    # # POST /login
+    # # Login and generate JWT (with LDAP)
+    # def token
+    #     user = User.get_user_by_email(params[:email])
+
+    #     if(LDAP.connect) # If connect to LDAP server
+    #         if(LDAP.validateUser(params[:email], params[:password])) # If user and password exists in LDAP
+    #             if(user && user.authenticate(params[:password])) # If user exists and data is correct
+    #                 token = Token.create_token(user)
+        
+    #                 response =  { content: token, message: "User has been signed in successfully", status: 201 } # Return JWT
+        
+    #                 render json: response, status: 201
+    #             else
+    #                 response =  { content: {}, message: "Authentication failed in DB", status: 401 }
+    #                 render json: response, status: 401 # Return 'unauthorizated' error
+    #             end
+    #         else
+    #             response =  { content: {}, message: "Authentication failed in LDAP", status: 401 }
+    #             render json: response, status: 401 # Return 'unauthorizated' error
+    #         end
+    #     else
+    #         response =  { content: {}, message: "Connection error with LDAP server", status: 500 }
+    #         render json: response, status: 500 # Return 'internal server' error
+    #     end        
+    # end
+
     # POST /login
-    # Login and generate JWT
+    # Login and generate JWT (with LDAP)
     def token
         user = User.get_user_by_email(params[:email])
 
-        if(LDAP.connect) # If connect to LDAP server
-            if(LDAP.validateUser(params[:email], params[:password])) # If user and password exists in LDAP
-                if(user && user.authenticate(params[:password])) # If user exists and data is correct
-                    token = Token.create_token(user)
-        
-                    response =  { content: token, message: "User has been signed in successfully", status: 201 } # Return JWT
-        
-                    render json: response, status: 201
-                else
-                    response =  { content: {}, message: "Authentication failed in DB", status: 401 }
-                    render json: response, status: 401 # Return 'unauthorizated' error
-                end
-            else
-                response =  { content: {}, message: "Authentication failed in LDAP", status: 401 }
-                render json: response, status: 401 # Return 'unauthorizated' error
-            end
+        if(user && user.authenticate(params[:password])) # If user exists and data is correct
+            token = Token.create_token(user)
+
+            response =  { content: token, message: "User has been signed in successfully", status: 201 } # Return JWT
+
+            render json: response, status: 201
         else
-            response =  { content: {}, message: "Connection error with LDAP server", status: 500 }
-            render json: response, status: 500 # Return 'internal server' error
-        end        
+            response =  { content: {}, message: "Authentication failed in DB", status: 401 }
+            render json: response, status: 401 # Return 'unauthorizated' error
+        end     
     end
 
     # POST /verify_token
