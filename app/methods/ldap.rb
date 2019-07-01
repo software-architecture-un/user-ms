@@ -4,7 +4,7 @@ class LDAP
     def self.connect
         ldap = Net::LDAP.new()
 
-        ldap.host = "34.67.242.29" # Host
+        ldap.host = "35.238.43.149" # Host
         ldap.port = 389 # Port
         ldap.auth "cn=admin,dc=senderosun,dc=unal,dc=edu,dc=co", "admin" # dn + password
 
@@ -22,7 +22,7 @@ class LDAP
     def self.validateUser(email, password)
         ldap = Net::LDAP.new()
 
-        ldap.host = "34.67.242.29" # Host
+        ldap.host = "35.238.43.149" # Host
         ldap.port = 389 # Port
         ldap.auth "cn=" + email + ",ou=senderosun,dc=senderosun,dc=unal,dc=edu,dc=co", password # user + password
 
