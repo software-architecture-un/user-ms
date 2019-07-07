@@ -1,4 +1,14 @@
 class UserController < ApplicationController
+    ## Require ##
+
+    require 'httparty'
+
+    ##  ##
+
+
+    ## Include ##
+
+    include HTTParty # HTTParty to check the Facebook Token
 
     ## Filters ##
 
@@ -16,6 +26,29 @@ class UserController < ApplicationController
 
             if user.save 
                 user = User.get_user_by_id(user.id)
+
+                ## Send notifications ##
+
+                response = HTTParty.post("https://fcm.googleapis.com/fcm/send", 
+                    :body =>
+                    {
+                        :notification =>
+                        {
+                            :title => 'Senderos UN',
+                            :body => '¡Un nuevo usuario se ha unido a la comunidad!',
+                            :click_action => '',
+                            :icon => 'http://url-to-an-icon/icon.png'
+                        },
+                        :to => "/topics/senderos"
+                    }.to_json,
+                    :headers =>
+                    {
+                        'Content-Type' => 'application/json',
+                        'AUthorization' => 'key = AAAA5DQn7-M:APA91bHq8UzsCvz8z-2nwVi8PgwDQEFgBQYqJLtzRsy1oz7bqFWYi83YjKiaBTXAMpn4CjUwII5YpQv9mVwG9gV6hrd5V3Q9-UGYbc39o_AfU-9YeFoyHqa1aeenhK7X68QTbHpypMjg'
+                    }
+                )
+
+                ##  ##
 
                 response = { content: user, message: "User has been created successfully", status: 201 } # Return the created user
 
