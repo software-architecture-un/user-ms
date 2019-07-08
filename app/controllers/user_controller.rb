@@ -44,7 +44,7 @@ class UserController < ApplicationController
                     :headers =>
                     {
                         'Content-Type' => 'application/json',
-                        'AUthorization' => 'key = AAAA5DQn7-M:APA91bHq8UzsCvz8z-2nwVi8PgwDQEFgBQYqJLtzRsy1oz7bqFWYi83YjKiaBTXAMpn4CjUwII5YpQv9mVwG9gV6hrd5V3Q9-UGYbc39o_AfU-9YeFoyHqa1aeenhK7X68QTbHpypMjg'
+                        'AUthorization' => 'key=AAAA5DQn7-M:APA91bHq8UzsCvz8z-2nwVi8PgwDQEFgBQYqJLtzRsy1oz7bqFWYi83YjKiaBTXAMpn4CjUwII5YpQv9mVwG9gV6hrd5V3Q9-UGYbc39o_AfU-9YeFoyHqa1aeenhK7X68QTbHpypMjg'
                     }
                 )
 
