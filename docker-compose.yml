@@ -1,18 +1,23 @@
 version: '2.1'
 services:
   db:
-    image: postgres
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: users-db
+      MYSQL_USER: sa
+      MYSQL_PASSWORD: 123
     ports:
-      - "5434:5434"
-    volumes:
-      - /var/lib/postgresql/data
+      - "3307:3306"
   web:
     build: .
     image: web
-    command: bash -c "sleep 40 && rake db:drop db:create db:migrate db:seed && bundle exec rails s -p 3001 -b '0.0.0.0'"
+    command: bash -c "sleep 10 && rake db:drop db:create db:migrate db:seed && bundle exec rails s -p 3001 -b '0.0.0.0'"
     volumes:
       - .:/user-ms
     ports:
       - "3001:3001"
+    links:
+      - db:sql_srv
     depends_on:
       - db
