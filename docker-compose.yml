@@ -1,6 +1,7 @@
 version: '2.1'
 services:
-  db:
+  users-db:
+    container_name: users-db
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: 123
@@ -9,12 +10,14 @@ services:
       MYSQL_PASSWORD: 123
     ports:
       - "3307:3306"
-  web:
+  users-ms:
+    container_name: users-ms
     build: .
     command: bash -c "sleep 10 && rake db:drop db:create db:migrate db:seed && bundle exec rails s -p 3001 -b '0.0.0.0'"
     ports:
       - "3001:3001"
     links:
-      - db:sql_srv
+      - users-db:sql_srv
     depends_on:
-      - db
+      - users-db
+

@@ -21,7 +21,7 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   database: users-db
   pool: 5
-  host: db
+  host: users-db
   username: sa
   password: 123
 
