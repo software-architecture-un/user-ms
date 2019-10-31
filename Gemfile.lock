@@ -84,9 +84,10 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.10)
     multi_xml (0.6.0)
+    mysql2 (0.5.2)
     net-ldap (0.15.0)
     nio4r (2.3.1)
-    nokogiri (1.10.3)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     pg (1.1.4)
     puma (3.12.1)
@@ -153,6 +154,7 @@ DEPENDENCIES
   httparty
   jwt
   listen (>= 3.0.5, < 3.2)
+  mysql2
   net-ldap (~> 0.15.0)
   pg
   puma (~> 3.11)
