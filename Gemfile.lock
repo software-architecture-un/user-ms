@@ -84,6 +84,7 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.10)
     multi_xml (0.6.0)
+    mysql2 (0.5.3)
     net-ldap (0.15.0)
     nio4r (2.3.1)
     nokogiri (1.10.3)
@@ -117,7 +118,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
-    rake (12.3.2)
+    rake (12.3.3)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
@@ -153,6 +154,7 @@ DEPENDENCIES
   httparty
   jwt
   listen (>= 3.0.5, < 3.2)
+  mysql2
   net-ldap (~> 0.15.0)
   pg
   puma (~> 3.11)
